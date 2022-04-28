@@ -10,17 +10,12 @@ import random
 config = dotenv_values("../.env") 
 apikey=config["API_KEY"]
 loc = config["PM-20_LOC"]
-deployment_space_name=config["DEPLOYMENT_SPACE_NAME"]
-model_name = config["MODEL_NAME"]
-deployment_name = "Deployment of "+ model_name
 space_id = config["SPACE_ID"]
-deployment_id = config["MODEL_ID"]
+deployment_id = config["DEPLOYMENT_ID"]
 
 wml_credentials = {
     "apikey": apikey,
     "url": "https://"+loc+".ml.cloud.ibm.com",
-    "version" : "1.0.204",
-    "username" : "Nupur Negi"
     }
 client = APIClient(wml_credentials)
 
@@ -44,7 +39,7 @@ dataset_id = asset_details_dataset['metadata']['guid']
 
 assets_dict = {'dataset_asset_id' : dataset_id, 'metadata_asset_id' : metadata_id, 'prep_script_asset_id' : prep_id, 'dataset_name' : 'customer_history.csv'}
 
-wml_credentials["instance_id"] = "openshift"
+# wml_credentials["instance_id"] = "openshift"  (Model deployment failed credentials error)
 
 ai_parms = {'wml_credentials' : wml_credentials,'space_id' : space_id, 'assets' : assets_dict, 'model_deployment_id' : deployment_id}
 
@@ -59,10 +54,7 @@ def scoring_pipeline(parms=ai_parms):
     import json
     
     from ibm_watson_machine_learning import APIClient
-    # wml_credentials = {
-    #     "apikey": "X78-DJUDQJo-dRAMlC9Jkzxxk8Lu8sTu5SAzVRgnqJVN",
-    #     "url": "https://"+loc+".ml.cloud.ibm.com"
-    # }
+
     client = APIClient(parms['wml_credentials'])
     client.set.default_space(parms['space_id'])
      

@@ -1,22 +1,22 @@
 from ibm_watson_machine_learning import APIClient
 from dotenv import dotenv_values
-
+import os
 
 config = dotenv_values("../.env") 
 apikey=config["API_KEY"]
 loc = config["PM-20_LOC"]
-# deployment_space_name=config["DEPLOYMENT_SPACE_NAME"]
-# model_name = config["MODEL_NAME"]
-# deployment_name = "Deployment of "+ model_name
 space_id = config["SPACE_ID"]
-# deployment_id = config["MODEL_ID"]
+
+token=os.system("curl -X POST 'https://iam.cloud.ibm.com/oidc/token' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey="+apikey+"| grep -o '\"access_token\":\"[^\"]*' | grep -o '[^\"]*$'")
 
 wml_credentials = {
-    "apikey": apikey,
-    "url": "https://"+loc+".ml.cloud.ibm.com"
-    }
-client = APIClient(wml_credentials)
+   "token": token,
+   "instance_id" : "openshift",
+   "url": "https://"+loc+".ml.cloud.ibm.com",
+   "version": "3.5"
+}
 
+client = APIClient(wml_credentials)
 client.set.default_space(space_id)
 
 r_shiny_deployment_name='Customer-Attrition-Prediction-Shiny-App'
@@ -41,3 +41,4 @@ rshiny_deployment = client.deployments.create(app_uid, deployment_meta_props)
 
 
 print(wml_credentials["url"]+"/ml/v4/deployments/"+rshiny_deployment['metadata']['id'] + '/r_shiny')
+
