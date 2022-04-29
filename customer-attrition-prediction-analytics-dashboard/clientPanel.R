@@ -11,7 +11,7 @@ clientPanel <- function() {
     "Client View",
     value = "clientPanel",
     shinyjs::useShinyjs(),
-    shinyjs::extendShinyjs(text = refreshCode, functions = c("refresh")),
+    shinyjs::extendShinyjs(text = refreshCode, functions = c("winprint")),
     
     panel(
       br(),br(),
@@ -158,7 +158,7 @@ clientServer <- function(input, output, session, sessionVars) {
     insertUI(
       selector = "#customerImage",
       where = "beforeEnd",
-      ui = img(src = paste0("profiles/",client$image), style = "display: block;margin-left: auto;margin-right: auto;", width=150, height=150)
+      ui = img(src = paste0("./www/profiles/",client$image), style = "display: block;margin-left: auto;margin-right: auto;", width=150, height=150)
     )
     
     # Load customer data for customer sessionVars$selectedClientId

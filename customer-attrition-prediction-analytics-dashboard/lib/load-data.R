@@ -10,11 +10,11 @@ library(scales)
 
 readDataset <- function(fileName) {read.csv(file.path(fileName))}
 
-customer <- readDataset("/home/rstudio/project-objectstorage/customer.csv")
-customer_summary <- readDataset("/home/rstudio/project-objectstorage/customer_summary.csv")
-customer_history <- readDataset("/home/rstudio/project-objectstorage/customer_history.csv")
-account <- readDataset("/home/rstudio/project-objectstorage/account.csv")
-account_summary <- readDataset("/home/rstudio/project-objectstorage/account_summary.csv")
+customer <- readDataset("../data/customer.csv")
+customer_summary <- readDataset("../data/customer_summary.csv")
+customer_history <- readDataset("../data/customer_history.csv")
+account <- readDataset("../data/account.csv")
+account_summary <- readDataset("../data/account_summary.csv")
 
 
 

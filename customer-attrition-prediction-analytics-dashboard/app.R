@@ -9,7 +9,7 @@
 ### Install any missing packages ###
 
 # Determine packages to install among requirements
-list.of.packages <- c("shinyjs", "dplyr")
+list.of.packages <- c("shinyjs", "dplyr", "ggplot2", "stringr", "readr", "DT", "httr", "rjson")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
 if(length(new.packages)) {  # check if there's anything to install
@@ -38,10 +38,15 @@ if(length(new.packages)) {  # check if there's anything to install
 # Load required packages
 library(shiny)
 library(shinyjs)
+# install.packages("DT", type = "binary")
 library(DT)
+# install.packages("ggplot2")
 library(ggplot2)
 library(dplyr)
+# install.packages("stringr")
 library(stringr)
+# install.packages("readr")
+# install.packages("contrib.url",repos = "http://cran.us.r-project.org")
 
 # if the packages that get installed have a different version number to development, install the correct version
 if((!"shinyWidgets" %in% rownames(installed.packages()))||((packageVersion("shinyWidgets")!= "0.4.9")))
@@ -65,7 +70,7 @@ ui <- navbarPage(
   "Customer Attrition Prediction",
   id = "lfeNav",
   inverse = TRUE,
-  responsive = TRUE,
+  # responsive = TRUE,  # This option is deprecated; it is no longer optional with Bootstrap 3.
   collapsible = TRUE,
   theme = "css/style.css",
   homePanel(),

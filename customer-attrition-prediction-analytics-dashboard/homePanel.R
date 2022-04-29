@@ -40,7 +40,7 @@ homePanel <- function() {
         lapply(clientIds, function(id){
           client <- clients[[toString(id)]]
           clientButton(id, client$name, client$risk, 
-                       paste0("profiles/", client$image))
+                       paste0("./www/profiles/", client$image))
         })
       )),
       column(8, 
