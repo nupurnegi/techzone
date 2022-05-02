@@ -7,10 +7,11 @@ apikey=config["API_KEY"]
 loc = config["PM-20_LOC"]
 space_id = config["SPACE_ID"]
 
-token=os.system("curl -X POST 'https://iam.cloud.ibm.com/oidc/token' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey="+apikey+"| grep -o '\"access_token\":\"[^\"]*' | grep -o '[^\"]*$'")
+token=os.popen("curl -X POST 'https://iam.cloud.ibm.com/oidc/token' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey="+apikey+"'| grep -o '\"access_token\":\"[^\"]*' | grep -o '[^\"]*$'").read()
+token=token.strip()
 
 wml_credentials = {
-   "token": token,
+   "token" : token,
    "instance_id" : "openshift",
    "url": "https://api.dataplatform.cloud.ibm.com",
    "version": "3.5"

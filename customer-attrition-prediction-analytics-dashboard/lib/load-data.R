@@ -10,11 +10,11 @@ library(scales)
 
 readDataset <- function(fileName) {read.csv(file.path(fileName))}
 
-customer <- readDataset("../data/customer.csv")
-customer_summary <- readDataset("../data/customer_summary.csv")
-customer_history <- readDataset("../data/customer_history.csv")
-account <- readDataset("../data/account.csv")
-account_summary <- readDataset("../data/account_summary.csv")
+customer <- readDataset("/projects/techzone/customer-attrition-prediction-analytics-dashboard/data/customer.csv")
+customer_summary <- readDataset("/projects/techzone/customer-attrition-prediction-analytics-dashboard/data/customer_summary.csv")
+customer_history <- readDataset("/projects/techzone/customer-attrition-prediction-analytics-dashboard/data/customer_history.csv")
+account <- readDataset("/projects/techzone/customer-attrition-prediction-analytics-dashboard/data/account.csv")
+account_summary <- readDataset("/projects/techzone/customer-attrition-prediction-analytics-dashboard/data/account_summary.csv")
 
 
 
