@@ -39,6 +39,8 @@ deploy_meta = {
 created_deployment = client.deployments.create(published_model_id, meta_props=deploy_meta)
 scoring_endpoint = client.deployments.get_scoring_href(created_deployment)
 
+deployment_id=scoring_endpoint.rsplit('/', 2)[-2]
+
 #model URL is generated with the date of model creation.
 from datetime import datetime
 now = datetime.now() # current date and time
@@ -48,4 +50,5 @@ modelurl = scoring_endpoint+"?version="+date
 
 with open("../.env", "a") as f:
     f.write("\n#MODEL URL\nMODEL_URL=\""+modelurl+"\"\n")
+    f.write("\n#DEPLOYMENT ID\nDEPLOYMENT_ID=\""+deployment_id+"\"\n")
 print('end point url is :' + modelurl)
