@@ -12,7 +12,7 @@ token=os.system("curl -X POST 'https://iam.cloud.ibm.com/oidc/token' -H 'Content
 wml_credentials = {
    "token": token,
    "instance_id" : "openshift",
-   "url": "https://"+loc+".ml.cloud.ibm.com",
+   "url": "https://api.dataplatform.cloud.ibm.com",
    "version": "3.5"
 }
 
