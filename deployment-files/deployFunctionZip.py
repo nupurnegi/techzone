@@ -38,6 +38,12 @@ wml_credentials = {
 client = APIClient(wml_credentials)
 
 client.set.default_space(space_id)
+
+asset_details_json = client.data_assets.create('training_user_inputs_and_prepped_column_names.json', file_path='/projects/customer-attrition/training_user_inputs_and_prepped_column_names.json')
+asset_details_script = client.data_assets.create('attrition_prep.py', file_path='/projects/customer-attrition/attrition_prep.py')      
+asset_details_dataset = client.data_assets.create('customer_history.csv', file_path='/projects/customer-attrition/customer_history.csv')
+
+client.data_assets.list()
 i=0
 
 client.import_assets.start(space_id=space_id,
