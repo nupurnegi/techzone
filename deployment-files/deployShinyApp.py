@@ -3,18 +3,17 @@ from dotenv import dotenv_values
 import os
 
 config = dotenv_values("../.env") 
-apikey=config["API_KEY"]
-loc = config["PM-20_LOC"]
 space_id = config["SPACE_ID"]
-
-token=os.popen("curl -X POST 'https://iam.cloud.ibm.com/oidc/token' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey="+apikey+"'| grep -o '\"access_token\":\"[^\"]*' | grep -o '[^\"]*$'").read()
-token=token.strip()
+url = config["CP4DURL"]
+username = config["CP4DUSER"]
+password = config["CP4DPASSWORD"]
 
 wml_credentials = {
-   "token" : token,
    "instance_id" : "openshift",
-   "url": "https://api.dataplatform.cloud.ibm.com",
-   "version": "3.5"
+   "url": url,
+   "version": "3.5",
+   "username"    : username,
+   "password"    : password,
 }
 
 client = APIClient(wml_credentials)
@@ -41,5 +40,6 @@ app_uid = client.shiny.get_uid(app_details)
 rshiny_deployment = client.deployments.create(app_uid, deployment_meta_props)
 
 
+print("\n###################################Your R Shiny Dashboard URL###################################\n")
 print(wml_credentials["url"]+"/ml/v4/deployments/"+rshiny_deployment['metadata']['id'] + '/r_shiny')
-
+print("\n#################################################################################################\n")
