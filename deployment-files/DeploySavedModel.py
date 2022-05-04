@@ -7,14 +7,19 @@ import dotenv
 #bring model id and deployment space name from .env file
 config = dotenv_values("../.env") 
 deployment_space_name=config["DEPLOYMENT_SPACE_NAME"]
-apikey=config["API_KEY"]
+# apikey=config["API_KEY"]
 model_name = config["MODEL_NAME"]
-loc = config["PM-20_LOC"]
-
+# loc = config["PM-20_LOC"]
+url = config["CP4DURL"]
+username = config["CP4DUSER"]
+password = config["CP4DPASSWORD"]
 #get connected to watson ML
 wml_credentials = {
-  "apikey": apikey,
-  "url": "https://"+loc+".ml.cloud.ibm.com"
+   "instance_id" : "openshift",
+   "url": url,
+   "version": "3.5",
+   "username"    : username,
+   "password"    : password,
 }
 client = APIClient(wml_credentials)
 
