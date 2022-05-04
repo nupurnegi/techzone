@@ -25,7 +25,7 @@ meta_props = {
     client.shiny.ConfigurationMetaNames.NAME: "Customer Attrition Prediction Shiny Assets",
     client.shiny.ConfigurationMetaNames.DESCRIPTION: 'Store shiny assets in deployment space' # optional
 }
-app_details = client.shiny.store(meta_props, '/projects/customer-attrition/techzoneAssets/customerAttritionPredictionShinyAssets.zip')
+app_details = client.shiny.store(meta_props, '/projects/customer-attrition/dataplatformAssets/customerAttritionPredictionShinyAssets.zip')
 
 # Deployment metadata.
 deployment_meta_props = {

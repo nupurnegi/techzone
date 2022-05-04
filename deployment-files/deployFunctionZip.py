@@ -5,18 +5,6 @@ import dotenv
 from ibm_watson_machine_learning.deployment import WebService
 import string
 import random
-  
-
-# deployment_space_name = ''.join(random.choices(string.ascii_uppercase +
-#                              string.digits, k = 15))
-# f = open("../key_file", "r")
-# obj=json.loads(f.read())
-# apikey=obj["apikey"]
-
-# #add the apikey to .env file
-# dotenv.set_key("../.env","API_KEY",apikey)
-
-# dotenv.set_key("../.env","DEPLOYMENT_SPACE_NAME",deployment_space_name)
 
 config = dotenv_values("../.env") 
 deployment_space_name = config["DEPLOYMENT_SPACE_NAME"]
@@ -61,6 +49,7 @@ asset_details = client.repository.get_details()
 for resource in asset_details["functions"]["resources"] :
     if(resource["metadata"]["name"] == function_name):
         dotenv.set_key("../.env","FUNCTION_ID",resource["metadata"]["id"])
+        function_id = resource["metadata"]["id"]
         print("Deployment Space with ID " + space_id + " and name "+ deployment_space_name +" containing function " + function_name + " is created successfully.")
     else:
         print("Funtion Import Failed!!!.")
@@ -73,7 +62,8 @@ meta_props = {
     client.deployments.ConfigurationMetaNames.DESCRIPTION:"Customer Attrition Scoring Function which will take raw data for scoring, prep it into the format required for the model and score it to return attrition probability of the customer.",
     client.deployments.ConfigurationMetaNames.ONLINE: {}
 }
-function_id = config["FUNCTION_ID"]
+
+# function_id = config["FUNCTION_ID"]
 # deploy the function
 function_deployment_details = client.deployments.create(artifact_uid=function_id, meta_props=meta_props)
 scoring_deployment_id = client.deployments.get_uid(function_deployment_details)
